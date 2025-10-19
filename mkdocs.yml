@@ -1,0 +1,4 @@
+site_name: My Documentation
+site_url: https://github.com/MegoM2323/Group-dynamics-HW3.git
+theme:
+  name: material
