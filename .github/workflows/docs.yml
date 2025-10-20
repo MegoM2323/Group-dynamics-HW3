@@ -29,11 +29,14 @@ jobs:
           mkdir -p docs/content
           cp content/*.pdf docs/content/ 2>/dev/null || true
       - run: mkdocs build --verbose
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         with:
           path: ./site
 
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
