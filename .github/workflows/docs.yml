@@ -24,7 +24,11 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install -r requirements.txt
-      - run: mkdocs build
+      - name: Copy PDF files to docs directory
+        run: |
+          mkdir -p docs/content
+          cp content/*.pdf docs/content/ 2>/dev/null || true
+      - run: mkdocs build --verbose
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./site
